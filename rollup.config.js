@@ -2,6 +2,7 @@ import { rollup } from 'rollup';
 import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import nodeResolve from 'rollup-plugin-node-resolve';
+import replace from 'rollup-plugin-replace';
 
 export default {
   entry: 'app/js/main.jsx',
@@ -18,6 +19,9 @@ export default {
     }),
     commonjs({
       include: 'node_modules/**'
+    }),
+    replace({
+      'process.env.NODE_ENV': JSON.stringify('production')
     })
   ],
   dest: 'app/dist/bundle.js',
