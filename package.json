@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "NODE_ENV=production rollup -c",
+    "build": "rollup -c",
+    "build:watch": "rollup --watch -c",
     "start": "http-server app"
   },
   "dependencies": {
@@ -18,6 +19,7 @@
     "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-commonjs": "^6.0.0",
     "rollup-plugin-node-resolve": "^2.0.0",
-    "rollup-plugin-replace": "^1.1.1"
+    "rollup-plugin-replace": "^1.1.1",
+    "rollup-watch": "^2.5.0"
   }
 }

@@ -1,12 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Greeting } from './greetings.jsx';
 
-
-class Greeting extends React.Component {
-  render() {
-    return <div class="greeting">Hello { this.props.name }</div>;
-  }
-}
 
 ReactDOM.render(
   <Greeting name="Jane" />,
