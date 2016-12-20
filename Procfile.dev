@@ -1,0 +1,2 @@
+web: python server.py
+build: npm run build:watch

@@ -5,7 +5,7 @@ import nodeResolve from 'rollup-plugin-node-resolve';
 import replace from 'rollup-plugin-replace';
 
 export default {
-  entry: 'app/js/main.jsx',
+  entry: 'static/js/main.jsx',
   plugins: [
     babel({
       exclude: 'node_modules/**'
@@ -24,6 +24,6 @@ export default {
       'process.env.NODE_ENV': JSON.stringify('production')
     })
   ],
-  dest: 'app/dist/bundle.js',
+  dest: 'static/dist/bundle.js',
   format: 'iife'
 };

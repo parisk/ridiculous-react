@@ -1,18 +1,16 @@
 {
-  "name": "project",
+  "name": "react-ticketing-app",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "build": "rollup -c",
-    "build:watch": "rollup --watch -c",
-    "start": "http-server app"
+    "build:watch": "rollup --watch -c"
   },
   "dependencies": {
     "babel-cli": "^6.18.0",
     "babel-plugin-external-helpers": "^6.18.0",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
-    "http-server": "^0.9.0",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "rollup": "^0.37.0",
