@@ -1,48 +1,47 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import { FlightList } from './components/FlightList.jsx';
 
 
-var flights = [];
 var flightsContainer = document.getElementById('flights-container');
+var flights;
 
-function renderFlights(flights) {
-  ReactDOM.render(
-    <FlightList flights={ flights } />,
-    flightsContainer
-  );
+
+function FlightComponent(props) {
+  // props.from, props.to, props.stops
+  return <div className="list-group-item">From {props.from} to {props.to} with {props.stops} stops</div>;
 }
 
-$('#filter').click(function () {
-  var fromAirport = $('#from').val();
-  var toAirport = $('#to').val();
-  var stops = parseInt($('#stops').val());
-
-  var filteredFlights = flights.filter(function (flight) {
-    if (fromAirport && (fromAirport != flight.from)) {
-      return false;
-    }
-
-    if (toAirport && (toAirport != flight.to)) {
-      return false;
-    }
-
-    if (stops && (stops != flight.stops)) {
-      return false;
-    }
-
-    return true;
+function FlightListComponent(props) {
+  var flightComponents = props.flights.map(function (flight) {
+    return <FlightComponent from={flight.from} to={flight.to} stops={flight.stops} />
   });
+  return <div className="list-group">{ flightComponents }</div>
+}
 
-  renderFlights(filteredFlights);
+$.get('/flights/').done(function (flightList) {
+  flights = flightList;
+  ReactDOM.render(
+    <FlightListComponent flights={ flightList } />,
+    flightsContainer
+  );
 });
 
-$('#reset').click(function () {
-  renderFlights(flights);
-})
+$('#filter').click(function () {
+  var filteredFlightList = [],
+      fromAirport = $('#from').val(),
+      currentFlight;
 
-$.get('/flights/').done(function (data) {
-  flights = data;
-  renderFlights(flights);
+  if (fromAirport) {
+    for (var i=0; i<flights.length; i++) {
+      currentFlight = flights[i];
+      if (fromAirport == currentFlight.from) {
+        filteredFlightList.push(currentFlight);
+      }
+    }
+  }
+
+  var filteredFlightListComponent = <FlightListComponent flights={ filteredFlightList } />;
+
+  ReactDOM.render(filteredFlightListComponent, flightsContainer);
 });
